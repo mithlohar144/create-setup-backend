@@ -1,0 +1,29 @@
+{
+  "name": "create-setup-backend",
+  "author": "mithlohar144",
+  "version": "1.0.0",
+  "description": "⚡ Scaffold a complete Node.js MVC backend structure with a single command!",
+  "main": "index.js",
+  "bin": {
+    "create-setup-backend": "bin/index.js"
+  },
+  "scripts": {
+    "test": "node bin/index.js test-project"
+  },
+  "keywords": [
+    "backend",
+    "scaffold",
+    "mvc",
+    "nodejs",
+    "express",
+    "boilerplate",
+    "cli",
+    "generator",
+    "starter"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "fs-extra": "^11.2.0"
+  }
+}
