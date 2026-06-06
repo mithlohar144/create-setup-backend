@@ -23,20 +23,12 @@ if (fs.existsSync(targetDir)) {
   process.exit(1);
 }
 
-// ─── FOLDERS TO CREATE (empty) ───────────────────────────────────
-
-const folders = [
-  "src/config",
-  "src/controllers",
-  "src/models",
-  "src/routes",
-  "src/middlewares",
-  "src/utils",
-];
-
 // ─── FILES TO CREATE ─────────────────────────────────────────────
 
 const files = {
+
+  // ── Root files ────────────────────────────────────────────────
+
   "package.json": JSON.stringify({
     name: projectName,
     version: "1.0.0",
@@ -94,14 +86,20 @@ npm run dev
 \`\`\`
 ${projectName}/
 ├── src/
-│   ├── config/        → DB and app config
-│   ├── controllers/   → Business logic
-│   ├── models/        → Mongoose schemas
-│   ├── routes/        → Express routes
-│   ├── middlewares/   → Auth, error handling
-│   ├── utils/         → Helper functions
-│   └── app.js         → Express app setup
-├── server.js          → Server entry point
+│   ├── config/
+│   │   └── db.js          → MongoDB connection
+│   ├── controllers/
+│   │   └── user.controller.js
+│   ├── models/
+│   │   └── user.model.js
+│   ├── routes/
+│   │   └── user.routes.js
+│   ├── middlewares/
+│   │   └── auth.middleware.js
+│   ├── utils/
+│   │   └── response.util.js
+│   └── app.js             → Express app setup
+├── server.js              → Server entry point
 ├── .env
 ├── .env.example
 ├── .gitignore
@@ -114,7 +112,8 @@ ${projectName}/
 - dotenv
 `,
 
-  // server.js — outside src
+  // ── server.js — outside src ───────────────────────────────────
+
   "server.js": `require("dotenv").config();
 const app = require("./src/app");
 
@@ -125,7 +124,8 @@ app.listen(PORT, () => {
 });
 `,
 
-  // app.js — inside src only
+  // ── src/app.js ────────────────────────────────────────────────
+
   "src/app.js": `const express = require("express");
 const cors = require("cors");
 
@@ -146,18 +146,100 @@ app.get("/", (req, res) => {
 
 module.exports = app;
 `,
+
+  // ── config/db.js ─────────────────────────────────────────────
+
+  "src/config/db.js": `const mongoose = require("mongoose");
+
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(process.env.MONGO_URI);
+    console.log(\`✅ MongoDB Connected: \${conn.connection.host}\`);
+  } catch (error) {
+    console.error("❌ DB connection failed:", error.message);
+    process.exit(1);
+  }
 };
 
-// ─── HELPERS ─────────────────────────────────────────────────────
+module.exports = connectDB;
+`,
 
-function createFolders(basePath, folderList) {
-  folderList.forEach((folder) => {
-    const fullPath = path.join(basePath, folder);
-    fs.mkdirSync(fullPath, { recursive: true });
-    // Add .gitkeep so empty folders are tracked by git
-    fs.writeFileSync(path.join(fullPath, ".gitkeep"), "");
-  });
-}
+  // ── controllers/user.controller.js — empty sample ────────────
+
+  "src/controllers/user.controller.js": `// User Controller
+// TODO: Add your controller logic here
+
+// Example:
+// exports.getAllUsers = async (req, res, next) => {
+//   try {
+//     res.json({ success: true, data: [] });
+//   } catch (error) {
+//     next(error);
+//   }
+// };
+`,
+
+  // ── models/user.model.js — empty sample ──────────────────────
+
+  "src/models/user.model.js": `const mongoose = require("mongoose");
+
+// TODO: Define your schema here
+
+// Example:
+// const userSchema = new mongoose.Schema({
+//   name: { type: String, required: true },
+//   email: { type: String, required: true, unique: true },
+// }, { timestamps: true });
+
+// module.exports = mongoose.model("User", userSchema);
+`,
+
+  // ── routes/user.routes.js — empty sample ─────────────────────
+
+  "src/routes/user.routes.js": `const express = require("express");
+const router = express.Router();
+
+// TODO: Import your controller and define routes here
+
+// Example:
+// const { getAllUsers } = require("../controllers/user.controller");
+// router.get("/", getAllUsers);
+
+module.exports = router;
+`,
+
+  // ── middlewares/auth.middleware.js — empty sample ─────────────
+
+  "src/middlewares/auth.middleware.js": `// Auth Middleware
+// TODO: Add your middleware logic here
+
+// Example:
+// const protect = (req, res, next) => {
+//   const token = req.headers.authorization?.split(" ")[1];
+//   if (!token) return res.status(401).json({ message: "No token provided" });
+//   next();
+// };
+
+// module.exports = { protect };
+`,
+
+  // ── utils/response.util.js — empty sample ────────────────────
+
+  "src/utils/response.util.js": `// Response Utility Helpers
+// TODO: Add your helper functions here
+
+// Example:
+// exports.successResponse = (res, data, message = "Success", statusCode = 200) => {
+//   return res.status(statusCode).json({ success: true, message, data });
+// };
+
+// exports.errorResponse = (res, message = "Something went wrong", statusCode = 400) => {
+//   return res.status(statusCode).json({ success: false, message });
+// };
+`,
+};
+
+// ─── HELPER ──────────────────────────────────────────────────────
 
 function createFiles(basePath, fileMap) {
   for (const [filePath, content] of Object.entries(fileMap)) {
@@ -177,16 +259,10 @@ console.log(chalk.gray("─".repeat(40)));
 
 fs.mkdirSync(targetDir, { recursive: true });
 
-// Create empty folders
-folders.forEach((f) => {
-  process.stdout.write(chalk.gray(`   creating → `) + chalk.blue(f + "/") + "\n");
-});
-createFolders(targetDir, folders);
-
-// Create files
 Object.keys(files).forEach((f) => {
   process.stdout.write(chalk.gray(`   creating → `) + chalk.green(f) + "\n");
 });
+
 createFiles(targetDir, files);
 
 console.log(chalk.gray("─".repeat(40)));
