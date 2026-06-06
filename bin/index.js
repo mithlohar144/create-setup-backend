@@ -96,8 +96,6 @@ ${projectName}/
 │   │   └── user.routes.js
 │   ├── middlewares/
 │   │   └── auth.middleware.js
-│   ├── utils/
-│   │   └── response.util.js
 │   └── app.js             → Express app setup
 ├── server.js              → Server entry point
 ├── .env
@@ -223,20 +221,6 @@ module.exports = router;
 // module.exports = { protect };
 `,
 
-  // ── utils/response.util.js — empty sample ────────────────────
-
-  "src/utils/response.util.js": `// Response Utility Helpers
-// TODO: Add your helper functions here
-
-// Example:
-// exports.successResponse = (res, data, message = "Success", statusCode = 200) => {
-//   return res.status(statusCode).json({ success: true, message, data });
-// };
-
-// exports.errorResponse = (res, message = "Something went wrong", statusCode = 400) => {
-//   return res.status(statusCode).json({ success: false, message });
-// };
-`,
 };
 
 // ─── HELPER ──────────────────────────────────────────────────────
