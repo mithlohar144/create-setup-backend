@@ -1,11 +1,10 @@
 {
   "name": "create-setup-backend",
-  "author": "mithlohar144",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "⚡ Scaffold a complete Node.js MVC backend structure with a single command!",
   "main": "index.js",
   "bin": {
-    "create-setup-backend": "bin/index.js"
+    "create-setup-backend": "./bin/index.js"
   },
   "scripts": {
     "test": "node bin/index.js test-project"
@@ -19,9 +18,27 @@
     "boilerplate",
     "cli",
     "generator",
-    "starter"
+    "starter",
+    "create",
+    "setup",
+    "template",
+    "node-backend",
+    "express-boilerplate",
+    "mvc-structure"
   ],
+  "author": "mithlohar144",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mithlohar144/create-setup-backend"
+  },
+  "homepage": "https://www.npmjs.com/package/create-setup-backend",
+  "bugs": {
+    "url": "https://github.com/mithlohar144/create-setup-backend/issues"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "dependencies": {
     "chalk": "^4.1.2",
     "fs-extra": "^11.2.0"

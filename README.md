@@ -4,7 +4,7 @@
 
 [![npm version](https://img.shields.io/npm/v/create-setup-backend.svg)](https://www.npmjs.com/package/create-setup-backend)
 [![npm downloads](https://img.shields.io/npm/dm/create-setup-backend.svg)](https://www.npmjs.com/package/create-setup-backend)
-[![license](https://img.shields.io/npm/l/create-setup-backend.svg)](https://github.com/yourusername/create-setup-backend/blob/main/LICENSE)
+[![license](https://img.shields.io/npm/l/create-setup-backend.svg)](https://github.com/mithlohar144/create-setup-backend/blob/main/LICENSE)
 
 ---
 
@@ -111,4 +111,4 @@ NODE_ENV=development
 
 ## 📄 License
 
-MIT © [create-setup-backend](https://www.npmjs.com/package/create-setup-backend)
+MIT © [create-setup-backend](https://github.com/mithlohar144/create-setup-backend)
