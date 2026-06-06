@@ -1,6 +1,6 @@
 {
   "name": "create-setup-backend",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "⚡ Scaffold a complete Node.js MVC backend structure with a single command!",
   "main": "index.js",
   "bin": {
